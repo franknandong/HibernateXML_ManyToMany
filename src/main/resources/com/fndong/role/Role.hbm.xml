@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 15, 2016 5:55:09 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.fndong.role.Role" table="role" catalog="hibernate" optimistic-lock="version">
+        <id name="roleId" type="java.lang.Integer">
+            <column name="role_id" />
+            <generator class="identity" />
+        </id>
+        <property name="roleName" type="string">
+            <column name="role_name" length="30" not-null="true" />
+        </property>
+        <set name="transactionses" table="trans_role" inverse="false" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="role_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.fndong.role.Transactions">
+                <column name="transaction_id" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
